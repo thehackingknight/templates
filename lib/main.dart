@@ -16,12 +16,15 @@ import 'utils/constants.dart';
 
 void main() async {
   final binding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: binding);
+  if (Platform.isAndroid || Platform.isIOS) {
+    FlutterNativeSplash.preserve(widgetsBinding: binding);
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+  }
+
   //setupWindowManager();
   await configIsar();
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
 
   ///FLUTTER DOWNLOADER
   if (Platform.isAndroid || Platform.isIOS) {

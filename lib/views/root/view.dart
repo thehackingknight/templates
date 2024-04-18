@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tu/tu.dart';
 import 'package:tu/views.dart';
 import 'package:tuned/views/root/ctrl.dart';
+import 'package:tuned/widgets/sidebar.dart';
 
 import '../about.dart';
 import '../home.dart';
@@ -31,12 +32,14 @@ class RootView extends StatelessWidget {
         icon: const Icon(
           CupertinoIcons.info_circle,
         ),
-        label: "About"),
+        label: "About",
+        isAction: true),
     TuPage('/settings', const SettingsView(),
         icon: const Icon(
           CupertinoIcons.settings,
         ),
-        label: "Settings")
+        label: "Settings",
+        isAction: true)
   ];
   static RootCtrl ctrl = Get.put(RootCtrl());
   @override
@@ -45,8 +48,31 @@ class RootView extends StatelessWidget {
         GoRouter.of(context).routeInformationProvider.value.uri.toString();
     var currIndex = routes.indexWhere((element) => element.to == routeName);
     currIndex = currIndex >= 0 ? currIndex : 0;
+    return isMobile
+        ? MobileRoot(
+            routeName: routeName,
+            currIndex: currIndex,
+            child: child,
+          )
+        : DesktopRoot(routeName: routeName, currIndex: currIndex, child: child);
+  }
+}
+
+class MobileRoot extends StatelessWidget {
+  final String routeName;
+  final int currIndex;
+  final Widget child;
+  const MobileRoot(
+      {super.key,
+      required this.routeName,
+      required this.currIndex,
+      required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    final routes = RootView.routes;
     return Scaffold(
-      drawer: Drawer(),
+      drawer: const Drawer(),
       body: WillPopScope(
           onWillPop: () async {
             if (routeName != routes[0].to) {
@@ -86,5 +112,30 @@ class RootView extends StatelessWidget {
               )
               .toList()),
     );
+  }
+}
+
+class DesktopRoot extends StatelessWidget {
+  final String routeName;
+  final int currIndex;
+  final Widget child;
+  const DesktopRoot(
+      {super.key,
+      required this.routeName,
+      required this.currIndex,
+      required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: colors.surface,
+        ),
+        body: Row(
+          children: [
+            TuSidebar(routeName: routeName, currIndex: currIndex),
+            Expanded(child: child)
+          ],
+        ));
   }
 }

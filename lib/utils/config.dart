@@ -1,9 +1,11 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:applovin_max/applovin_max.dart';
 import 'package:isar/isar.dart';
 import 'package:path/path.dart' as pth;
 import 'package:path_provider/path_provider.dart';
+import 'package:tu/tu.dart';
 import 'package:tu/utils/functions.dart';
 import 'package:tuned/main.dart';
 
@@ -67,12 +69,21 @@ class TuAppLovin {
 }
 
 Future configIsar() async {
-  final dir = await getExternalStorageDirectory();
-  isar = await Isar.open([SettingsSchema],
-      name: "app",
-      directory: pth.join(
-          dir!.path, "db") // (await getApplicationDocumentsDirectory()).path,
-      );
+  final dir = isMobile
+      ? await getExternalStorageDirectory()
+      : await getApplicationDocumentsDirectory();
+
+  final String _path = pth.join(
+      dir!.path + (!isMobile ? "TunedBass/${Tu.appCtrl.title}" : ""), "db");
+  final realDir = Directory.fromUri(Uri.directory(_path));
+  // Create directory if it does not exist already on desktop
+  if (!isMobile && !(await realDir.exists())) {
+    realDir.createSync(recursive: true);
+    clog("DIRECTORY CREATED");
+  }
+  clog("THE DIR IS: $realDir");
+  isar =
+      await Isar.open([SettingsSchema], name: "app", directory: realDir.path);
   clog(isar.path);
   clog("ISAR CONFIGURED");
 }

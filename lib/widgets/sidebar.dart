@@ -1,13 +1,17 @@
-/* import 'package:flutter/material.dart';
-import 'package:tuned/views/root/root_view.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tu/tu.dart';
-/* 
+import 'package:tuned/views/root/view.dart';
+
 class TuSidebar extends StatelessWidget {
-  const TuSidebar({Key? key}) : super(key: key);
+  final String routeName;
+  final int currIndex;
+  const TuSidebar({Key? key, required this.routeName, required this.currIndex})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final rootCtrl = Root.ctrl;
+    final routes = RootView.routes;
 
     return Obx(
       () => Container(
@@ -20,7 +24,7 @@ class TuSidebar extends StatelessWidget {
               Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: rootCtrl.tabs
+                  children: routes
                       .where((it) => !it.isAction)
                       .toList()
                       .asMap()
@@ -31,34 +35,40 @@ class TuSidebar extends StatelessWidget {
                       child: IconButton(
                           splashRadius: splashRadius,
                           iconSize: iconSize,
-                          color: rootCtrl.currentTab == e.key
-                              ? colors.primary
-                              : null,
+                          color: currIndex == e.key ? colors.primary : null,
                           onPressed: () {
-                            rootCtrl.currentTab = e.key;
+                            final route = routes[e.key];
+                            try {
+                              context.goNamed(route.to);
+                            } catch (e) {
+                              clog(e);
+                            }
                           },
                           icon: e.value.icon),
                     );
                   }).toList()),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: rootCtrl.tabs
+                children: routes
                     .where((it) => it.isAction)
                     .toList()
                     .asMap()
                     .entries
                     .map((e) {
                   final index =
-                      e.key + rootCtrl.tabs.where((it) => !it.isAction).length;
+                      e.key + routes.where((it) => !it.isAction).length;
                   return SizedBox(
                     height: appBarH,
                     child: IconButton(
                         splashRadius: splashRadius,
-                        color: rootCtrl.currentTab == index
-                            ? colors.primary
-                            : null,
+                        color: currIndex == index ? colors.primary : null,
                         onPressed: () {
-                          rootCtrl.currentTab = index;
+                          final route = routes[index];
+                          try {
+                            context.goNamed(route.to);
+                          } catch (e) {
+                            clog(e);
+                          }
                         },
                         icon: e.value.icon),
                   );
@@ -69,4 +79,3 @@ class TuSidebar extends StatelessWidget {
     );
   }
 }
- */ */
