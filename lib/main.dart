@@ -8,6 +8,7 @@ import 'package:tu/widgets/updates_view.dart';
 import 'package:tuned/controllers/app_ctrl.dart';
 import 'package:tu/tu.dart';
 import 'package:tuned/utils/config.dart';
+import 'package:tuned/views/root/view.dart';
 import 'package:visibility_aware_state/visibility_aware_state.dart';
 import 'controllers/form_ctrl.dart';
 import 'models/settings.dart';
@@ -35,7 +36,7 @@ void main() async {
             true // option: set to false to disable working with http links (default: false)
         );
   }
-  TuAppLovin.config();
+  //TuAppLovin.config();
   clog("RUNNING APP...");
   runApp(const MainApp());
 }
@@ -51,7 +52,7 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends VisibilityAwareState<MainApp> {
-  final _router = AppRouter().router;
+  //final _router = AppRouter().router;
   final _appCtrl = MainApp.appCtrl;
 
   _configApp() async {
@@ -94,24 +95,12 @@ class _MainAppState extends VisibilityAwareState<MainApp> {
     _configApp();
   }
 
-  _onRouter() {
-    clog("On router");
-    try {
-      final currentRoute = _router.routerDelegate.currentConfiguration.fullPath;
-      if (currentRoute != MainApp.appCtrl.currentRoute) {
-        MainApp.appCtrl.currentRoute = currentRoute;
-      }
-    } catch (e) {
-      clog(e);
-    }
-  }
-
   @override
   void initState() {
     super.initState();
     clog("MAIN APP INIT");
     _init();
-    _router.routerDelegate.addListener(_onRouter);
+    //_router.routerDelegate.addListener(_onRouter);
   }
 
   void _onVisibilityChanged(WidgetVisibility visibility) {
@@ -130,9 +119,9 @@ class _MainAppState extends VisibilityAwareState<MainApp> {
     return Obx(
       () => !_appCtrl.ready
           ? const TuSplash()
-          : MaterialApp.router(
-              routerConfig: _router,
-
+          : MaterialApp(
+              home: const RootView(),
+              //routerConfig: _router,
               theme: TuTheme(
                       context: context,
                       colors: TuColors(),

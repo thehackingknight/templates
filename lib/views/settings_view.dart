@@ -67,6 +67,21 @@ class _SettingsViewState extends State<SettingsView> {
               ]),
             ),
             InfoItem(
+              child: tuRow(children: [
+                const Text("Dark mode"),
+                Obx(
+                  () => Switch(
+                      value: Tu.appCtrl.darkMode,
+                      onChanged: (val) async {
+                        await isar.writeTxn(() async {
+                          isar.settings.put(_appSettings!..darkMode = val);
+                        });
+                        Tu.appCtrl.darkMode = val;
+                      }),
+                )
+              ]),
+            ),
+            InfoItem(
               child: const Text("Check updates"),
               onTap: () async {
                 await checkUpdates(

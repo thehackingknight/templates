@@ -44,7 +44,8 @@ class TuSidebar extends StatelessWidget {
                               clog(e);
                             }
                           },
-                          icon: e.value.icon),
+                          //TODO: Edit for desktop
+                          icon: Icon(e.value.icon)),
                     );
                   }).toList()),
               Column(
@@ -70,7 +71,7 @@ class TuSidebar extends StatelessWidget {
                             clog(e);
                           }
                         },
-                        icon: e.value.icon),
+                        icon: Icon(e.value.icon)),
                   );
                 }).toList(),
               ),

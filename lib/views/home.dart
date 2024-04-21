@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tu/tu.dart';
@@ -56,6 +57,23 @@ class _HomeViewState extends State<HomeView> {
                   gpop();
                   context.goNamed('/settings');
                 },
+              ),
+              Container(
+                color: Colors.black,
+                width: 200,
+                child: Material(
+                  child: InkWell(
+                    splashColor: Colors.red,
+                    enableFeedback: true,
+                    radius: 200,
+                    onTap: () {
+                      clog("Tapped");
+                    },
+                    child: const Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [Icon(CupertinoIcons.home), Text("Home")]),
+                  ),
+                ),
               )
             ],
           ),
