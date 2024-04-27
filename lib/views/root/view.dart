@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tu/tu.dart';
 import 'package:tu/views.dart';
+import 'package:tuned/views/rf.dart';
 import 'package:tuned/views/root/ctrl.dart';
 import 'package:tuned/widgets/sidebar.dart';
 
@@ -20,6 +21,8 @@ class RootView extends StatelessWidget {
       label: 'Widgets',
       icon: Icons.apps_outlined,
     ),
+    TuPage('/rf', const RFView(),
+        icon: CupertinoIcons.lab_flask, label: "RF", isAction: true),
     TuPage('/about', const AboutView(),
         icon: CupertinoIcons.info_circle, label: "About", isAction: true),
     TuPage('/settings', const SettingsView(),

@@ -1,8 +1,11 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+//import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:tu/functions.dart';
 import 'package:tu/widgets/updates_view.dart';
 import 'package:tuned/controllers/app_ctrl.dart';
@@ -17,10 +20,12 @@ import 'utils/constants.dart';
 
 void main() async {
   final binding = WidgetsFlutterBinding.ensureInitialized();
+  unawaited(MobileAds.instance.initialize());
+
   if (Platform.isAndroid || Platform.isIOS) {
     FlutterNativeSplash.preserve(widgetsBinding: binding);
     await SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
+      //DeviceOrientation.portraitUp,
     ]);
   }
 
