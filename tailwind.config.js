@@ -17,12 +17,17 @@ export default {
         themes: [
             {
                 tb: {
+                    ...require("daisyui/src/theming/themes")["[data-theme=tb]"],
                     primary: "#ffa500",
                     secondary: "#f6d860",
                     accent: "#ecb847",
-                    neutral: "#3d4451",
+                    neutral: "#181818",
+                    '.bg-2':{
+                        'background-color': '#202020'
+                    },
                     dark: '#292828',
-                    "base-100": "#010101",
+                    "base-100": "#111111",
+                    
                 },
             },
             "dark",
@@ -36,3 +41,4 @@ export default {
     },
     plugins: [require("daisyui")],
 };
+ 

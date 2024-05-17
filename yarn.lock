@@ -568,6 +568,13 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.19.3.tgz#e5036be529f757e58d9a7771f2f1b14782986a74"
   integrity sha512-FbUN+0ZRXsypPyWE2IwIkVjDkDnJoMJARWOcFZn4KPPli+QnKqF0z1anvfaYe3ev5HFCpRDLLBDHyOALLppWHw==
 
+"@flaticon/flaticon-uicons@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@flaticon/flaticon-uicons/-/flaticon-uicons-3.2.1.tgz#bc151b2bd71c13a86f279f6b0966ee746e2be469"
+  integrity sha512-eLHbrC15uwtTXqBtPMEXcYvb0M1lYmTINkQe46NgEx5EkJKrKSjbziD08rvSGDih3r0tYEYoRz3Gjz6F5NaDHQ==
+  optionalDependencies:
+    esbuild-linux-64 "^0.14.5"
+
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.3.0.tgz#8368869dcb735be2e7f5cb7647de78e167a251fb"
@@ -2603,6 +2610,11 @@ error-stack-parser-es@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/error-stack-parser-es/-/error-stack-parser-es-0.1.1.tgz#9c1d2bbfbba8b51670062e7fbf43c6bcfb6eb4da"
   integrity sha512-g/9rfnvnagiNf+DRMHEVGuGuIBlCIMDFoTA616HaP2l9PlCjGjVhD98PNbVSJvmK4TttqT5mV5tInMhoFgi+aA==
+
+esbuild-linux-64@^0.14.5:
+  version "0.14.54"
+  resolved "https://registry.yarnpkg.com/esbuild-linux-64/-/esbuild-linux-64-0.14.54.tgz#de5fdba1c95666cf72369f52b40b03be71226652"
+  integrity sha512-EgjAgH5HwTbtNsTqQOXWApBaPVdDn7XcK+/PtJwZLT1UmpLoznPd8c5CxqsH2dQK3j05YsB3L17T8vE7cp4cCg==
 
 esbuild@^0.18.10, esbuild@~0.18.20:
   version "0.18.20"

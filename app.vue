@@ -8,12 +8,5 @@
     </Html>
 </template> 
 <script setup lang="ts">
-import "~/src/styles/daisyui.scss";
-
-useHead({
-    link: [{
-        rel: 'stylesheet',
-        href: '/assets/fa/fa.css'
-    }]
-});
+import '@/src/styles/styles.scss'
 </script>

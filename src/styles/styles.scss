@@ -1,8 +1,9 @@
+@import "@material-design-icons/font";
+@import "@flaticon/flaticon-uicons/css/all/all";
 @import "./colors";
-@import "./forms";
 @import "./vars";
 @import "./classes";
-@import "@material-design-icons/font";
+
 
 @font-face {
     font-family: Poppins;
@@ -35,9 +36,8 @@ body,
 #__nuxt {
     padding: 0;
     margin: 0;
-    background-color: $color-card !important;
-    color: $color-white-1 !important;
     font-family: Poppins, sans-serif;
+  @apply bg-base-100;
     * {
         &::-webkit-scrollbar-track {
             -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -55,68 +55,6 @@ body,
         }
     }
 }
-
-.card {
-    @apply block max-w-sm p-2 border border-gray-200 rounded-lg shadow   dark:border-gray-700;
-}
-
-.sidebar {
-    @apply relative top-0 left-0 z-40 bg-body;
-    border-right: $card-border;
-    width: $sidenav-w;
-    height: calc(100vh - $sidenav-w);
-    .content {
-        @apply h-full px-3 py-4 overflow-y-auto _flex _jc-sb;
-
-        ul{
-           @apply flex flex-col ;
-          
-           &:first-child{
-            flex: auto
-           }
-        }
-        .bar-item {
-            @apply flex p-1  items-center  rounded-lg;
-            * {
-                font-size: 30px;
-            }
-            color: $color-white-3;
-            &:hover {
-                background-color: $color-dark-0;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 500px){
-    .sidebar {
-        position: fixed !important;
-        width: 100% !important;
-        height: $sidenav-w !important;
-        bottom: -2px !important;
-        left: 0;
-        top: unset !important;
-        align-items: center !important;
-        border-top: $card-border;
-    .content, ul{
-        flex-direction: row !important;
-        justify-content: space-between;
-    }
-    .hide-sm{
-            display: none !important; 
-    }
-
-    }
-}
-
-header {
-    nav {
-        @apply fixed w-full z-50 bg-body;
-        height: $sidenav-w;
-        border-bottom: $card-border;
-    }
-} 
-
 main,
 .sidebar {
     position: relative;
@@ -125,6 +63,7 @@ main,
 main {
     overflow-y: scroll;
     flex: 1;
+    margin-bottom: $sidenav-w;
 }
 
 .tu-app {
@@ -136,78 +75,93 @@ main {
     max-height: calc(100vh - $sidenav-w);
 }
 
-.drawer {
+.navbar {
     position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    border-radius: 0px;
+    z-index: 90;
+    border-bottom: 1px solid $on-bg-tb;
+    i{
+        font-size: 17px;
+    }
+}
+
+$shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.205);
+
+.shadow {
+    box-shadow: $shadow;
+}
+.sidebar {
+    width: $sidenav-w;
+    border-radius: 0;
+    padding: 1.2rem 4px;
+    border-right: 1px solid $on-bg-tb;
     z-index: 50;
-    background-color: $color-overlay;
-    display: none;
-    transition: all 5s ease;
-    &.right {
-        right: 0;
+    height: calc(100vh - $sidenav-w);
+    i{
+        font-size: 20px;
     }
-    .content {
-        transition: all 5s ease;
-        @apply w-300px flex flex-col;
-
-        height: 100%;
-        position: absolute;
-        right: 0;
-        background-color: $color-card;
-        box-shadow: -1px 0 2px 2px $color-overlay;
-        transform: translateX(300px);
-    }
-
-    .drawer-body{
-       @apply flex flex-col _jc-sb;
-       flex: auto;
-
-    }
-
-    &.open {
-        display: block;
-        .content {
-            transform: translateX(0);
-        }
+}
+@media screen and (max-width: 767px) {
+    .sidebar {
+        border-radius: 15px;
+        flex-direction: row !important;
+        padding: 0 4px;
+        flex-wrap: nowrap;
+        box-shadow: $shadow; 
+        position: fixed !important;
+        width: calc(100% - 20px) !important;
+        height: $sidenav-w !important;
+        bottom: 8px !important;
+        left: 10px;
+        top: unset !important;
+        align-items: center !important;
+        justify-content: space-around;
+        border: 1px solid $on-bg-tb; 
     }
 }
 
-.drawer-item{
-    @apply flex items-center p-2 rounded-lg hover-card-0 gap-15 my-2;
-    *{
-        color: $color-white-2
-    }
-}
-
-
-.txt-brand{
-    @apply self-center text-2xl font-semibold whitespace-nowrap;
-}
-
-
+$on-bg-black: #1a1a1a8f;
 .router-link-active{
     color: $color-orange;
+    background-color: $on-bg-black;
 }
+
+body, html, #__nuxt {
+    height: 100%;
+}
+
 
 fieldset{
     border-radius: 10px; 
+    legend{
+        font-weight: bold !important;
+        //letter-spacing: 2px;
+        width: auto;
+        padding: 5px; 
+        font-size: 20px;
+    }
     &.fieldset{
-        border-color: $color-card;
-        border-width: 4px;
+        border-color: $on-bg-tb;
+        border-width: 1px;
          padding: 20px;
          &:not(.no-el){box-shadow: 0px 1px 2px rgb(14, 14, 14);}
-         legend{
-             font-weight: bold !important;
-             letter-spacing: 2px;
-             width: auto;
-             padding: 5px;
-         }
+     
      }
 }
 
+a.link{
+    @apply text-primary;
+    text-decoration: none !important;
+}
 
-.floating-field{
-    @extend .drawer
-} 
+.sidebar, .navbar, input, textarea, main{
+@apply bg-base-100
+}  
+
+input, textarea{
+    width: 100%;
+}
+
+.bg-1{
+    background-color: #202020;
+}
