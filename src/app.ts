@@ -6,6 +6,7 @@ import logger from 'morgan';
 
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
+import authRouter from './routes/auth';
 
 const app = express();
 import { default as mongoose } from 'mongoose';
@@ -31,7 +32,7 @@ async function connectMongo(){
     let mongoURL = (DEV ? process.env.MONGO_URL_LOCAL : process.env.MONGO_URL )!
     try {
         console.log(mongoURL);
-      await mongoose.connect(mongoURL, {dbName: "tutrader"});
+      await mongoose.connect(mongoURL, {dbName: "tb"});
       console.log('Connection established'); 
     }
     catch(e) {
@@ -50,6 +51,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const parser = multer().none();
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

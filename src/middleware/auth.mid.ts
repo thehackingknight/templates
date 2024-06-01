@@ -16,7 +16,7 @@ const authenticator = async (req : Request, res: Response, next: NextFunction, i
         const tkn = authorization.split(" ")[1];      
      if (tkn){
          try {
-            const {payload} = jwt.verify(tkn, process.env.PRIVATE_KEY!) as IObj;
+            const {payload} = jwt.verify(tkn, process.env.SECRET_KEY!) as IObj;
             if (payload?.id){
                 const user =  await User.findById(payload.id).exec()
                     req.user = user

@@ -13,16 +13,16 @@ function randomInRange(min: number, max: number) {
 
 
 const genToken = (data: IObj, exp? : string | number | undefined) => {
-    const { PRIVATE_KEY } = process.env;
+    const { SECRET_KEY } = process.env;
     return exp
         ? jwt.sign(
               {
                   data,
               },
-              PRIVATE_KEY!,
+              SECRET_KEY!,
               { expiresIn: exp }
           )
-        : jwt.sign({ payload: data }, PRIVATE_KEY!);
+        : jwt.sign({ payload: data }, SECRET_KEY!);
 };
 const genOTP = async (phone?: string, email?: string) => {
     const pin = randomInRange(1000, 9999);
@@ -198,4 +198,9 @@ const sendMail = async (subject: string, body: string, clients: string | string[
     const buff = fs.readFileSync(jsonPath, { encoding: "utf-8" });
     return JSON.parse(buff)
   }
+
+  export const  isEmail = (emailAdress: string)=>{
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return emailAdress.match(regex) ? true : false
+}
   export { sendMail,getStoreDetails, genToken,  genOTP, randomInRange, tunedErr };
